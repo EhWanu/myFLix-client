@@ -1,5 +1,9 @@
-/node_modules
-/.cache
-/dist
-/src/.cache
-/src/dist
+# Ignore node_modules folder
+node_modules
+
+.cache
+dist
+
+src/.cache
+
+src/dist
