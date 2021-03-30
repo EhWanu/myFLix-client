@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container'
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -16,30 +17,43 @@ export function LoginView(props) {
   };
 
   
+  
 
   return (
-    <Row className="justify-content-md-center">
-    <Col md={4}>
-    <Form>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
-      </Form.Group>
-
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-      </Form.Group>
-      <Button 
-      variant="primary" 
-      type="submit" 
+    <Container>
+      <Form>
+       <Row className="justify-content-md-center">
+        <Col md>
       
-      onClick={handleSubmit}>
         
-        Login
-      </Button>
-    </Form>
-    </Col>
-        </Row>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+        </Form.Group>
+       </Col>
+       
+
+       
+        <Col md>
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+          </Form.Group>
+        </Col>
+       </Row>
+
+        <Row>
+          <Col>
+          
+            <Button 
+              variant="primary" 
+               type="submit" 
+               onClick={handleSubmit}>
+               Login
+          </Button>
+         </Col>
+       </Row>
+      </Form>
+     </Container>
   );
 }
