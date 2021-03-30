@@ -8,6 +8,7 @@ import { MovieView } from '../movie-view/movie-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+
 export class MainView extends React.Component {
 
   constructor() {
@@ -71,7 +72,7 @@ export class MainView extends React.Component {
             </Col>
           )
           : movies.map(movie => (
-            <Col md={3}>
+            <Col md={2}>
               <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
             </Col>
           ))
