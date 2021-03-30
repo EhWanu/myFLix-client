@@ -34499,7 +34499,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return _onClick(movie);
         }
-      }, "variant", "link"), "Open")));
+      }, "variant", "link"), "Details")));
     }
   }]);
 
@@ -34914,7 +34914,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59046" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61669" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
