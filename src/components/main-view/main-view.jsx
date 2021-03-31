@@ -21,14 +21,30 @@ export class MainView extends React.Component {
       user: null
     };
   }
-  componentDidMount(){
-    axios.get('https://camsmyflic.herokuapp.com/movies')
+
+  
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
+  }
+
+  
+  getMovies(token) {
+    axios.get('https://camsmyflic.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}`}
+    })
     .then(response => {
+      // Assign the result to the state
       this.setState({
         movies: response.data
       });
     })
-    .catch(error => {
+    .catch(function (error) {
       console.log(error);
     });
   }
@@ -39,10 +55,17 @@ export class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(user) {
+  
+
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
     });
+  
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
   }
 
   onRegister(register) {
