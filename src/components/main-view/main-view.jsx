@@ -2,6 +2,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import { BrowserRouter as Router, Route} from "react-router-dom";
+
 import { RegistrationView } from '../registration-view/registration-view'
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -96,20 +98,30 @@ export class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view"/>
 
     return (
-      <Row className="main-view justify-content-md-center container-fluid d-flex">
-        {selectedMovie
-          ? (
-            <Col md={4}>
-              <MovieView movie={selectedMovie} onBackClick={movie => this.onMovieClick(null)} />
-            </Col>
-          )
-          : movies.map(movie => (
-            <Col md={2}>
-              <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
-            </Col>
-          ))
-        }
-      </Row>
+      <Router>
+         <div className="main-view">
+
+
+          <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
+
+
+          <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
+
+
+          <Route path="/directors/:name" render={({ match }) => {
+            if (!movies) return <div className="main-view"/>;
+            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>}
+          } />
+
+
+          <Route path="/genres/:name" render={({ match }) => {
+              if (!movies) return <div className="main-view" />;
+              return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name)} movies={movies} />
+            }} />
+
+
+         </div>
+      </Router>
     );
   }
 }
