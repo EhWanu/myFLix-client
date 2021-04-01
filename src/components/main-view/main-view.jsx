@@ -86,6 +86,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user } = this.state;
     <Router>
+      
     <Route exact path="/" render={() => {
       if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
       return movies.map(m => <MovieCard key={m._id} movie={m}/>)
@@ -104,13 +105,15 @@ export class MainView extends React.Component {
     
     return (
       <Router>
-         <div className="main-view">
+         <Row className="main-view justify-content-md-center">
+            <Col md={3}>
+              <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
+            </Col>
+          </Row>
 
-
-          <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
-
-
-          <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
+     <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
+        
+          
 
 
           <Route
@@ -143,10 +146,7 @@ export class MainView extends React.Component {
                 );
               }}
             />
-
-
-         </div>
-      </Router>
+     </Router>
     );
   }
 }

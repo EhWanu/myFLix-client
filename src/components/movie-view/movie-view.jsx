@@ -1,15 +1,23 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 
 export class MovieView extends React.Component {
 
 
     render() {
-        const { movie, onBackClick } = this.props;
+        const { movie, } = this.props;
     
         return (
-          
+        <Container className="wrapper container-fluid">
+          <Row>
+            <Col className="col-3" />
+            <Col className="director-view container-fluid align-items-center col-6">
           <div className="movie-view">
             <div className="movie-poster">
               <img src={movie.ImagePath} />
@@ -23,17 +31,18 @@ export class MovieView extends React.Component {
               <span className="value">{movie.Description}</span>
             </div>
             <Link to={`/directors/${movie.Director.Name}`}>
-              <Button variant="link">Director</Button>
+              <Button variant="primary">Director</Button>
             </Link>
             <Link to={`/genres/${movie.Genre.Name}`}>
-             <Button variant="link">Genre</Button>
+             <Button variant="primary">Genre</Button>
             </Link>
-            
-            
-            <button onClick={() => { onBackClick(null); }}>Back</button>
-            
-    
+            <Link to={`/`}>
+                <Button variant="primary">Return</Button>
+            </Link>
           </div>
-    );
-  }
-}
+         </Col>
+       </Row>
+      </Container>
+          
+        )}
+};

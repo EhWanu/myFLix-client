@@ -39,7 +39,7 @@ export class DirectorView extends React.Component {
               <span className="value">{director.Director.Birth}</span>
             </div>
             <Link to={`/`}>
-              <Button variant="link">Return</Button>
+              <Button variant="primary">Return</Button>
             </Link>
           </Col>
           <Col className="col-3" />

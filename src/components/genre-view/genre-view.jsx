@@ -33,7 +33,7 @@ export class GenreView extends React.Component {
                 <span className="value">{genre.Genre.Description}</span>
             </div>
             <Link to={`/`}>
-                <Button variant="link">Return</Button>
+                <Button variant="primary">Return</Button>
             </Link>
             </Col>
             <Col className="col-3" />
@@ -42,6 +42,8 @@ export class GenreView extends React.Component {
     )
   }
 }
+
+
 
 GenreView.propTypes = {
     Movie: PropTypes.shape({
