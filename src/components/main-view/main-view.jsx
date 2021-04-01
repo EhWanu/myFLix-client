@@ -18,7 +18,7 @@ export class MainView extends React.Component {
     super();
 // Initial state is set to null
     this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null
     };
@@ -84,11 +84,15 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, selectedMovie, user } = this.state;
-
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
-   /* if (!register) return <RegistrationView onRegister={register => this.onRegister(register)} />;
-   */
+    <Router>
+    <Route exact path="/" render={() => {
+      if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      return movies.map(m => <MovieCard key={m._id} movie={m}/>)
+      }
+    }/>
+    <Route path="/register" render={() => <RegistrationView />} />
+    {/* you keep the rest routes here */}
+    </Router>
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view"/>;
@@ -96,7 +100,7 @@ export class MainView extends React.Component {
     if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />;
 
     if (movies.length === 0) return <div className="main-view"/>
-
+    
     return (
       <Router>
          <div className="main-view">
