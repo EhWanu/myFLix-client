@@ -3,7 +3,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { BrowserRouter as Router, Route} from "react-router-dom";
-
+import { DirectorView } from '../director-view/director-view';
 import { RegistrationView } from '../registration-view/registration-view'
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -112,16 +112,36 @@ export class MainView extends React.Component {
           <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
 
 
-          <Route path="/directors/:name" render={({ match }) => {
-            if (!movies) return <div className="main-view"/>;
-            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>}
-          } />
+          <Route
+              path="/directors/:name"
+              render={({ match }) => {
+                if (!movies) return <div className="main-view" />;
+                return (
+                  <DirectorView
+                    director={movies.find(
+                      (m) => m.Director.Name === match.params.name
+                    )}
+                    movies={movies}
+                  />
+                );
+              }}
+            />
 
 
-          <Route path="/genres/:name" render={({ match }) => {
-              if (!movies) return <div className="main-view" />;
-              return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name)} movies={movies} />
-            }} />
+          <Route
+              path="/genres/:name"
+              render={({ match }) => {
+                if (!movies) return <div className="main-view" />;
+                return (
+                  <GenreView
+                    genre={movies.find(
+                      (m) => m.Genre.Name === match.params.name
+                    )}
+                    movies={movies}
+                  />
+                );
+              }}
+            />
 
 
          </div>
