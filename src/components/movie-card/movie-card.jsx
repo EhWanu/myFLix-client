@@ -4,22 +4,21 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
+import { Link } from "react-router-dom";
+
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     return (
-      
-      <Card
-      
-      >
+      <Card>
         <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
-          
-          <Button variant="primary"
-           onClick={() => onClick(movie)} 
-           >Details</Button>
+          <Card.Text>{movie.Description}</Card.Text>
+          <Link to={`/movies/${movie._id}`}>
+            <Button variant="primary">Details</Button>
+          </Link>
         </Card.Body>
       </Card>
     );

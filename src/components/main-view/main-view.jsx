@@ -2,7 +2,10 @@
 import React from 'react';
 import axios from 'axios';
 
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import { DirectorView } from '../director-view/director-view';
 import { RegistrationView } from '../registration-view/registration-view'
+import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -16,7 +19,7 @@ export class MainView extends React.Component {
     super();
 // Initial state is set to null
     this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null
     };
@@ -82,11 +85,16 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, selectedMovie, user } = this.state;
-
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
-   /* if (!register) return <RegistrationView onRegister={register => this.onRegister(register)} />;
-   */
+    <Router>
+      
+    <Route exact path="/" render={() => {
+      if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      return movies.map(m => <MovieCard key={m._id} movie={m}/>)
+      }
+    }/>
+    <Route path="/register" render={() => <RegistrationView />} />
+    {/* you keep the rest routes here */}
+    </Router>
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view"/>;
@@ -94,22 +102,51 @@ export class MainView extends React.Component {
     if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />;
 
     if (movies.length === 0) return <div className="main-view"/>
-
+    
     return (
-      <Row className="main-view justify-content-md-center container-fluid d-flex">
-        {selectedMovie
-          ? (
-            <Col md={4}>
-              <MovieView movie={selectedMovie} onBackClick={movie => this.onMovieClick(null)} />
+      <Router>
+         <Row className="main-view justify-content-md-center">
+            <Col md={3}>
+              <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
             </Col>
-          )
-          : movies.map(movie => (
-            <Col md={2}>
-              <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
-            </Col>
-          ))
-        }
-      </Row>
+          </Row>
+
+     <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
+        
+          
+
+
+          <Route
+              path="/directors/:name"
+              render={({ match }) => {
+                if (!movies) return <div className="main-view" />;
+                return (
+                  <DirectorView
+                    director={movies.find(
+                      (m) => m.Director.Name === match.params.name
+                    )}
+                    movies={movies}
+                  />
+                );
+              }}
+            />
+
+
+          <Route
+              path="/genres/:name"
+              render={({ match }) => {
+                if (!movies) return <div className="main-view" />;
+                return (
+                  <GenreView
+                    genre={movies.find(
+                      (m) => m.Genre.Name === match.params.name
+                    )}
+                    movies={movies}
+                  />
+                );
+              }}
+            />
+     </Router>
     );
   }
 }
