@@ -92,6 +92,9 @@ export class MainView extends React.Component {
       return movies.map(m => <MovieCard key={m._id} movie={m}/>)
       }
     }/>
+
+if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
     <Route path="/register" render={() => <RegistrationView />} />
     {/* you keep the rest routes here */}
     </Router>
@@ -105,10 +108,8 @@ export class MainView extends React.Component {
     
     return (
       <Router>
-         <Row className="main-view justify-content-md-center">
-            <Col md={3}>
+         <Row className="main-view">
               <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
-            </Col>
           </Row>
 
      <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
