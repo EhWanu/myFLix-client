@@ -1,4 +1,4 @@
-// myFlix-client/src/main-view/main-view.jsx
+
 import React from 'react';
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 
 
 export class MainView extends React.Component {
@@ -85,35 +86,43 @@ export class MainView extends React.Component {
 
   render() {
     const { movies, selectedMovie, user } = this.state;
-    <Router>
-      
-    <Route exact path="/" render={() => {
-      if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-      return movies.map(m => <MovieCard key={m._id} movie={m}/>)
-      }
-    }/>
-
-if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
-    <Route path="/register" render={() => <RegistrationView />} />
-    {/* you keep the rest routes here */}
-    </Router>
-
-    // Before the movies have been loaded
-    if (!movies) return <div className="main-view"/>;
     
+      
+    if (!movies) return <div className="main-view"/>;
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
     if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />;
-
     if (movies.length === 0) return <div className="main-view"/>
     
     return (
-      <Router>
-         <Row className="main-view">
-              <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
-          </Row>
+              <Router>
+                <Row className="main-view">
+                      <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
+                  </Row>
 
-     <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
-        
+            <Route 
+              path="/movies/:movieId" 
+                render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
+
+            <Route path="/register" render={() => <RegistrationView />} />
+
+
+                
+
+            <Route
+             exact path="/" 
+               render={() => {
+                if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+                  return movies.map(
+                    m => 
+                    <MovieCard
+                      key={m._id} movie={m}
+                    />
+                  )
+                }
+              }
+            />
+
+
           
 
 
