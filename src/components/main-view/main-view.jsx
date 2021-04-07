@@ -95,10 +95,7 @@ export class MainView extends React.Component {
     
     return (
               <Router>
-                <Row className="main-view">
-                      <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
-                  </Row>
-
+              
             <Route 
               path="/movies/:movieId" 
                 render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
@@ -107,7 +104,7 @@ export class MainView extends React.Component {
 
 
                 
-
+           <Row className="main-view">
             <Route
              exact path="/" 
                render={() => {
@@ -121,6 +118,7 @@ export class MainView extends React.Component {
                 }
               }
             />
+           </Row>
 
 
           
