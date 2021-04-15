@@ -10,6 +10,27 @@ import Card from 'react-bootstrap/Card';
 export class MovieView extends React.Component {
 
 
+  addFavouriteMovie(movie) {
+    let token = localStorage.getItem("token");
+    let url =
+      "https://camsmyflic.herokuapp.com/users/" +
+      JSON.parse(localStorage.getItem("user")).Username +
+      "/movies/" +
+      movie._id;
+    console.log(token);
+
+    axios
+      .post(url, "", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        // window.open("/", "_self");
+        window.open("/users/" + JSON.parse(localStorage.getItem("user")).Username, "_self");
+        alert("Added to favourites!");
+      });
+  }
+
     render() {
         const { movie, } = this.props;
     
@@ -39,6 +60,8 @@ export class MovieView extends React.Component {
             <Link to={`/`}>
                 <Button variant="primary">Return</Button>
             </Link>
+            <Link to={'/'}> <Button variant="primary">Back</Button> </Link>
+        <Button variant="primary" onClick={() => this.addFavouriteMovie(movie)}>Favourite</Button>
           </div>
          </Col>
        </Row>
@@ -46,3 +69,22 @@ export class MovieView extends React.Component {
           
         )}
 };
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string,
+    Year: PropTypes.number,
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string,
+      Biography: PropTypes.string
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      Birthdate: PropTypes.string
+    }),
+    Featured: PropTypes.bool
+  })
+}
