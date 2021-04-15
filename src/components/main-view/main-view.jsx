@@ -9,6 +9,7 @@ import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { ProfileView } from "../profile-view/profile-view";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -88,10 +89,10 @@ export class MainView extends React.Component {
     const { movies, selectedMovie, user } = this.state;
     
       
-    if (!movies) return <div className="main-view"/>;
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+   
+    
     if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />;
-    if (movies.length === 0) return <div className="main-view"/>
+    
     
     return (
               <Router>
@@ -138,6 +139,16 @@ export class MainView extends React.Component {
                 );
               }}
             />
+
+          <Route 
+            exact path='/users/:username'
+              render={({ history }) => {
+                if (!user) return <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />;
+                if (movies.length === 0) return;
+                return <ProfileView history={history} movies={movies} />
+              }
+            }
+         />
 
 
           <Route
