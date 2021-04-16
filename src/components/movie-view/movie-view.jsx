@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -14,7 +16,7 @@ export class MovieView extends React.Component {
     let token = localStorage.getItem("token");
     let url =
       "https://camsmyflic.herokuapp.com/users/" +
-      JSON.parse(localStorage.getItem("user")).Username +
+      (localStorage.getItem("user")).Username +
       "/movies/" +
       movie._id;
     console.log(token);
@@ -26,7 +28,7 @@ export class MovieView extends React.Component {
       .then((response) => {
         console.log(response);
         // window.open("/", "_self");
-        window.open("/users/" + JSON.parse(localStorage.getItem("user")).Username, "_self");
+        window.open("/users/"(localStorage.getItem("user")).Username, "_self");
         alert("Added to favourites!");
       });
   }
