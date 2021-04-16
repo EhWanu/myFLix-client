@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -28,7 +27,7 @@ export class MovieView extends React.Component {
       .then((response) => {
         console.log(response);
         // window.open("/", "_self");
-        window.open("/users/"(localStorage.getItem("user")).Username, "_self");
+        window.open("/users/" + (localStorage.getItem("user")).Username, "_self");
         alert("Added to favourites!");
       });
   }
