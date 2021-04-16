@@ -21,7 +21,7 @@ export class ProfileView extends React.Component {
       Password: null,
       Email: null,
       Birthday: null,
-      FavouriteMovies: [],
+      FavoriteMovies: [],
       validated: null,
     };
   }
@@ -58,17 +58,17 @@ export class ProfileView extends React.Component {
   }
 
   
-  handleRemoveFavourite(e, movie) {
+  handleRemoveFavorite(e, movie) {
     e.preventDefault();
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token'); 
     
     axios
-      .delete(`${Config.API_URL}/users/${username}/FavouriteMovies/${movie}`, {
+      .delete(`${Config.API_URL}/users/${username}/FavoriteMovies/${movie}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
-        alert('Movie was removed from your Favourites List.');
+        alert('Movie was removed from your Favorites List.');
         this.componentDidMount();
       })
       .catch(function (error) {
@@ -167,7 +167,7 @@ export class ProfileView extends React.Component {
   
 
   render() {
-    const { movies, FavouriteMovies, user, validated } = this.state;
+    const { movies, FavoriteMovies, user, validated } = this.state;
     const username = localStorage.getItem('user');
 
     return (
@@ -176,16 +176,16 @@ export class ProfileView extends React.Component {
 
           <Tab className='tab-item' eventKey='profile' title='Profile'>
             <Card className='profile-card' border='info'>
-                <Card.Title className='profile-title'>{username}'s Favourite Movies</Card.Title>
-                {FavouriteMovies.length === 0 && <div className='card-content'>You don't have any favourite movies yet!</div>}
+                <Card.Title className='profile-title'>{username}'s Favorite Movies</Card.Title>
+                {FavoriteMovies.length === 0 && <div className='card-content'>You don't have any favorite movies yet!</div>}
 
-                <div className='favourites-container'>
-                  {FavouriteMovies.length > 0 &&
+                <div className='favorites-container'>
+                  {FavoriteMovies.length > 0 &&
                     movies.map((movie) => {
-                      if (movie._id === FavouriteMovies.find((favMovie) => favMovie === movie._id)) {
+                      if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
                         return (
                           <div key={movie._id}>
-                            <Card className='favourites-item card-content' style={{ width: '16rem', flex: 1 }}>
+                            <Card className='favorites-item card-content' style={{ width: '16rem', flex: 1 }}>
                               {/* <Card.Img>{movie.ImageUrl}</Card.Img> */}
                               <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
                               <Card.Subtitle className='text-muted fav-subtitle'>{movie.Year}</Card.Subtitle>
@@ -193,7 +193,7 @@ export class ProfileView extends React.Component {
                                 <Button size='sm' className='profile-button view-movie' variant='info' as={Link} to={`/movies/${movie._id}`} target='_self'>
                                   View Movie
                                 </Button>
-                                <Button size='sm' className='profile-button remove-favourite' variant='danger' onClick={(e) => this.handleRemoveFavourite(e, movie._id)}>
+                                <Button size='sm' className='profile-button remove-favorite' variant='danger' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
                                   Remove
 							                	</Button>
                               </Card.Body>
@@ -269,7 +269,7 @@ export class ProfileView extends React.Component {
 ProfileView.propTypes = {
   movies: propTypes.array.isRequired,
   user: propTypes.shape({
-    FavouriteMovies: propTypes.arrayOf(
+    FavoriteMovies: propTypes.arrayOf(
       propTypes.shape({
         _id: propTypes.string.isRequired,
         Title: propTypes.string.isRequired,

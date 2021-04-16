@@ -11,7 +11,7 @@ import Card from 'react-bootstrap/Card';
 export class MovieView extends React.Component {
 
 
-  addFavouriteMovie(movie) {
+  addFavoriteMovie(movie) {
     let token = localStorage.getItem("token");
     let url =
       "https://camsmyflic.herokuapp.com/users/" +
@@ -28,7 +28,7 @@ export class MovieView extends React.Component {
         console.log(response);
         // window.open("/", "_self");
         window.open("/users/" + (localStorage.getItem("user")).Username, "_self");
-        alert("Added to favourites!");
+        alert("Added to favorites!");
       });
   }
 
@@ -62,7 +62,7 @@ export class MovieView extends React.Component {
                 <Button variant="primary">Return</Button>
             </Link>
             <Link to={'/'}> <Button variant="primary">Back</Button> </Link>
-        <Button variant="primary" onClick={() => this.addFavouriteMovie(movie)}>Favourite</Button>
+        <Button variant="primary" onClick={() => this.addFavoriteMovie(movie)}>Favorite</Button>
           </div>
          </Col>
        </Row>
