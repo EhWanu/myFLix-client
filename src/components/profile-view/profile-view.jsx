@@ -49,7 +49,7 @@ export class ProfileView extends React.Component {
           Password: currentUser[0].Password,
           Email: currentUser[0].Email,
           Birthday: currentUser[0].Birthday,
-          FavouriteMovies: currentUser[0].FavouriteMovies,
+          favoriteMovies: response.data.FavoriteMovies,
         });
       })
       .catch(function (error) {
