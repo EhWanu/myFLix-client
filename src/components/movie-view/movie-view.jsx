@@ -16,7 +16,7 @@ export class MovieView extends React.Component {
     let user = localStorage.getItem("user");
     let url =
       "https://camsmyflic.herokuapp.com/users/" +
-      (localStorage.getItem("user")).Username +
+      (localStorage.getItem("user")) +
       "/movies/" +
       movie._id;
     console.log(token);
