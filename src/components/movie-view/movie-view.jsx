@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -11,7 +12,7 @@ import Card from 'react-bootstrap/Card';
 export class MovieView extends React.Component {
 
 
-  addFavoriteMovie(movie) {
+  addFavouriteMovie(movie) {
     let token = localStorage.getItem("token");
     let url =
       "https://camsmyflic.herokuapp.com/users/" +
@@ -27,8 +28,11 @@ export class MovieView extends React.Component {
       .then((response) => {
         console.log(response);
         // window.open("/", "_self");
-        window.open("/users/" + (localStorage.getItem("user")).Username, "_self");
-        alert("Added to favorites!");
+
+
+
+        window.open("/users/"(localStorage.getItem("user")).Username, "_self");
+        alert("Added to favourites!");
       });
   }
 
@@ -62,7 +66,7 @@ export class MovieView extends React.Component {
                 <Button variant="primary">Return</Button>
             </Link>
             <Link to={'/'}> <Button variant="primary">Back</Button> </Link>
-        <Button variant="primary" onClick={() => this.addFavoriteMovie(movie)}>Favorite</Button>
+        <Button variant="primary" onClick={() => this.addFavouriteMovie(movie)}>Favourite</Button>
           </div>
          </Col>
        </Row>
