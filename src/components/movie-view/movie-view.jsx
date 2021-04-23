@@ -12,13 +12,11 @@ export class MovieView extends React.Component {
 
 
   addFavoriteMovie(movie) {
+    let user = localStorage.getItem("user");
     let token = localStorage.getItem("token");
     let url =
-      "https://camsmyflic.herokuapp.com/users/" +
-      (localStorage.getItem("user")) +
-      "/movies/" +
-      movie._id;
-    console.log(token);
+    "https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie._id}" +
+     
 
     axios
       .post(url, "", {
@@ -27,7 +25,7 @@ export class MovieView extends React.Component {
       .then((response) => {
         console.log(response);
         // window.open("/", "_self");
-        window.open("/users/" + (localStorage.getItem("user")).Username, "_self");
+        window.open("/users/${user}" + "_self");
         alert("Added to favorites!");
       });
   }

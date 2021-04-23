@@ -37,13 +37,11 @@ export class ProfileView extends React.Component {
   getUser(token) {
     const Username = localStorage.getItem('user');
     axios
-      .get('https://camsmyflic.herokuapp.com/users', {
+      .get('https://camsmyflic.herokuapp.com/users${Username}', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        //filter current user
-        const currentUser = response.data.filter(item => item.Username === Username)
-        
+        console.log(response);
         this.setState({
           Username: currentUser[0].Username,
           Password: currentUser[0].Password,
@@ -190,6 +188,7 @@ export class ProfileView extends React.Component {
                               <Card.Title className='movie-card-title'>{movie.Title}</Card.Title>
                               <Card.Subtitle className='text-muted fav-subtitle'>{movie.Year}</Card.Subtitle>
                               <Card.Body className='movie-card-body'>
+                                
                                 <Button size='sm' className='profile-button view-movie' variant='info' as={Link} to={`/movies/${movie._id}`} target='_self'>
                                   View Movie
                                 </Button>
