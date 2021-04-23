@@ -37,11 +37,12 @@ export class ProfileView extends React.Component {
   getUser(token) {
     const Username = localStorage.getItem('user');
     axios
-<<<<<<< HEAD
-      .get('https://camsmyflic.herokuapp.com//users', {
-=======
+
       .get('https://camsmyflic.herokuapp.com/users', {
->>>>>>> parent of 8ba41ee (fixed errors in profile-view regarding getUser)
+
+
+      .get('https://camsmyflic.herokuapp.com//users', {
+
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

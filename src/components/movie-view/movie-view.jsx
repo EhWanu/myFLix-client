@@ -16,7 +16,7 @@ export class MovieView extends React.Component {
     let token = localStorage.getItem("token");
     let url =
       "https://camsmyflic.herokuapp.com/users/" +
-      (localStorage.getItem("user")).Username +
+      (localStorage.getItem("user")) +
       "/movies/" +
       movie._id;
     console.log(token);
@@ -28,13 +28,11 @@ export class MovieView extends React.Component {
       .then((response) => {
         console.log(response);
         // window.open("/", "_self");
-<<<<<<< HEAD
+
+
+
         window.open("/users/"(localStorage.getItem("user")).Username, "_self");
         alert("Added to favourites!");
-=======
-        window.open("/users/" + (localStorage.getItem("user")).Username, "_self");
-        alert("Added to favorites!");
->>>>>>> parent of 8ba41ee (fixed errors in profile-view regarding getUser)
       });
   }
 
