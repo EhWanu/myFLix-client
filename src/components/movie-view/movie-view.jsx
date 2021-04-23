@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -60,7 +61,7 @@ export class MovieView extends React.Component {
                 <Button variant="primary">Return</Button>
             </Link>
             <Link to={'/'}> <Button variant="primary">Back</Button> </Link>
-        <Button variant="primary" onClick={() => this.addFavoriteMovie(movie)}>Favorite</Button>
+        <Button variant="primary" onClick={() => this.addFavouriteMovie(movie)}>Favourite</Button>
           </div>
          </Col>
        </Row>
