@@ -16,7 +16,7 @@ export class MovieView extends React.Component {
     let user = localStorage.getItem("user");
     let token = localStorage.getItem("token");
     let url =
-    "https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie._id}" +
+    `https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie._id}`
      
 
     axios
@@ -26,7 +26,7 @@ export class MovieView extends React.Component {
       .then((response) => {
         console.log(response);
         // window.open("/", "_self");
-        window.open("/users/${user}" + "_self");
+        window.open(`/users/${user}`, '_self');
         alert("Added to favorites!");
       });
   }
@@ -60,8 +60,7 @@ export class MovieView extends React.Component {
             <Link to={`/`}>
                 <Button variant="primary">Return</Button>
             </Link>
-            <Link to={'/'}> <Button variant="primary">Back</Button> </Link>
-        <Button variant="primary" onClick={() => this.addFavouriteMovie(movie)}>Favourite</Button>
+        <Button variant="primary" onClick={() => this.addFavoriteMovie(movie)}>Favourite</Button>
           </div>
          </Col>
        </Row>
