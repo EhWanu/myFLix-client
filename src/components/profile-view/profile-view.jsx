@@ -37,11 +37,13 @@ export class ProfileView extends React.Component {
   getUser(token) {
     const Username = localStorage.getItem('user');
     axios
-      .get('https://camsmyflic.herokuapp.com/users/${Username}', {
+      .get('https://camsmyflic.herokuapp.com/users', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response);
+        //filter current user
+        const currentUser = response.data.filter(item => item.Username === Username)
+        
         this.setState({
           Username: currentUser[0].Username,
           Password: currentUser[0].Password,
