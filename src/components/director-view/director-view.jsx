@@ -17,7 +17,7 @@ export class DirectorView extends React.Component {
   }
 
   render() {
-    const { movies, director } = this.props;
+    const { movies, director, movie, onBackClick } = this.props;
 
     if (!director) return null;
 
@@ -38,9 +38,9 @@ export class DirectorView extends React.Component {
               <span className="label">Born:  </span>
               <span className="value">{director.Director.Birth}</span>
             </div>
-            <Link to={`/`}>
-              <Button variant="primary">Return</Button>
-            </Link>
+            
+              <Button onClick={onBackClick} variant="primary">Return</Button>
+            
           </Col>
           <Col className="col-3" />
         </Row>

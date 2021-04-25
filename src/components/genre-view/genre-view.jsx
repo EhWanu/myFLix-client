@@ -15,7 +15,7 @@ export class GenreView extends React.Component {
   }
 
   render() {
-    const { movies, genre } = this.props;
+    const { movies, genre, onBackClick } = this.props;
 
     if (!genre) return null;
 
@@ -32,9 +32,9 @@ export class GenreView extends React.Component {
                 {/* <span className="label">Description: </span> */}
                 <span className="value">{genre.Genre.Description}</span>
             </div>
-            <Link to={`/`}>
-                <Button variant="primary">Return</Button>
-            </Link>
+            
+            <Button onClick={onBackClick} variant="primary">Return</Button>
+            
             </Col>
             <Col className="col-3" />
         </Row>
