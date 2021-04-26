@@ -60,7 +60,7 @@ export class ProfileView extends React.Component {
     let user = localStorage.getItem("user");
     let token = localStorage.getItem("token");
     let url =
-    `https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie.Title}`
+    `https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie._id}`
     
     axios
       .delete(url, "", {
