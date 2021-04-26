@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-
+import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -67,6 +67,15 @@ export function LoginView(props) {
          </Col>
        </Row>
       </Form>
+
+      <Link to={`/register`}>
+          <Button 
+            variant="primary"
+            className="sign-up-button existing-user"
+          >
+            New user?</Button>
+        </Link>
+
      </Container>
   );
 }

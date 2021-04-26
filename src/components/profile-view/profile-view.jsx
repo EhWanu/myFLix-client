@@ -103,7 +103,7 @@ export class ProfileView extends React.Component {
 
     axios({
       method: 'put',
-      url: `${'https://camsmyflic.herokuapp.com/'}users/${username}`,
+      url: `${'https://camsmyflic.herokuapp.com/'}users/${Username}`,
       headers: { Authorization: `Bearer ${token}` },
       data: {
         Username: newUsername ? newUsername : this.state.Username,
@@ -133,40 +133,23 @@ export class ProfileView extends React.Component {
 
   
   //deregister
-  handleDeregister() {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem("user");
-    axios
-      .delete(`https://camsmyflic.herokuapp.com/${user}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        alert('Your account has been deleted');
-        // this.props.history.push(`/`);
-        window.location.pathname = `/`
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  setUsername(input) {
-    this.Username = input;
-  }
-
-  setPassword(input) {
-    this.Password = input;
-  }
-
-  setEmail(input) {
-    this.Email = input;
-  }
-
-  setBirthday(input) {
-    this.Birthday = input;
-  }
+  handleDelete() {
+    let token = localStorage.getItem("token");
+    let user = localStorage.getItem("user");
+axios
+  .delete(
+    `https://camsmyflic.herokuapp.com/users/${user}`, { headers: { Authorization: `Bearer ${token}` } }
+  )
+  .then(() => {
+    alert(user + " has been deleted");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    window.location.pathname = "/";
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 
   
 
@@ -259,7 +242,7 @@ export class ProfileView extends React.Component {
               <Card.Title className='profile-title'>Delete Your Profile</Card.Title>
               <Card.Subtitle className='text-muted'>If you delete your account, it cannot be recovered.</Card.Subtitle>
               <Card.Body>
-                <Button className='button' variant='danger' onClick={(e) => this.handleDeregister(e)}>
+                <Button className='button' variant='danger' onClick={(e) => this.handleDelete(e)}>
                     Click Here If You're Sure!
 				        </Button>
               </Card.Body>

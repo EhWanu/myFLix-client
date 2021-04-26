@@ -12,11 +12,7 @@ export function RegistrationView(props) {
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
 
-    const swapView = (e) => {
-        e.preventDefault();
-        history.push(`/login`);
-        // window.location.pathname = `/login`
-    }
+    
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -59,7 +55,7 @@ export function RegistrationView(props) {
 
             <Form.Group controlId="formBirthday">
                 <Form.Label>Date of Birth:</Form.Label>
-                <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
+                <Form.Control type="birthday" value={birthday} onChange={(e) => setBirthday(e.target.value)} />
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleRegister}>
                 Submit
@@ -70,10 +66,10 @@ export function RegistrationView(props) {
 
 RegistrationView.propTypes = {
     register: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        password: PropTypes.string.isRequired,
-        confirmPassword: PropTypes.string.isRequired,
-        birthdate: PropTypes.instanceOf(Date).isRequired
-    }),
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+        Birthday: PropTypes.string,
+      }),
     onRegister: PropTypes.func,
 };
