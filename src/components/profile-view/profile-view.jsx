@@ -56,11 +56,11 @@ export class ProfileView extends React.Component {
   }
 
   
-  handleRemoveFavorite(movie) {
+  handleRemoveFavorite(movie_id) {
     let user = localStorage.getItem("user");
     let token = localStorage.getItem("token");
     let url =
-    `https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie._id}`
+    `https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie_id}`
     
     axios
       .delete(url, "", {
@@ -103,7 +103,7 @@ export class ProfileView extends React.Component {
 
     axios({
       method: 'put',
-      url: `${'https://camsmyflic.herokuapp.com/'}users/${username}`,
+      url: `${'https://camsmyflic.herokuapp.com/'}users/${Username}`,
       headers: { Authorization: `Bearer ${token}` },
       data: {
         Username: newUsername ? newUsername : this.state.Username,
@@ -131,46 +131,30 @@ export class ProfileView extends React.Component {
       });
   }
 
-  //DOES NOT WORK- WHY
+  
   //deregister
-  handleDeregister() {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem("user");
-    axios
-      .delete(`https://camsmyflic.herokuapp.com/${user}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        alert('Your account has been deleted');
-        // this.props.history.push(`/`);
-        window.location.pathname = `/`
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  setUsername(input) {
-    this.Username = input;
-  }
-
-  setPassword(input) {
-    this.Password = input;
-  }
-
-  setEmail(input) {
-    this.Email = input;
-  }
-
-  setBirthday(input) {
-    this.Birthday = input;
-  }
+  handleDelete() {
+    let token = localStorage.getItem("token");
+    let user = localStorage.getItem("user");
+axios
+  .delete(
+    `https://camsmyflic.herokuapp.com/users/${user}`, { headers: { Authorization: `Bearer ${token}` } }
+  )
+  .then(() => {
+    alert(user + " has been deleted");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    window.location.pathname = "/";
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 
   
 
   render() {
+    
     const {movies} = this.props;
     const {FavoriteMovies,  validated } = this.state;
     const username = localStorage.getItem('user');
@@ -199,7 +183,7 @@ export class ProfileView extends React.Component {
                                 <Button size='sm' className='profile-button view-movie' variant='info' as={Link} to={`/movies/${movie._id}`} target='_self'>
                                   View Movie
                                 </Button>
-                                <Button size='sm' className='profile-button remove-favourite' variant='danger' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
+                                <Button size='sm' className='profile-button remove-favourite' variant='danger' onClick={(e) => this.handleRemoveFavorite(movie._id)}>
                                   Remove
 							                	</Button>
                               </Card.Body>
@@ -258,7 +242,7 @@ export class ProfileView extends React.Component {
               <Card.Title className='profile-title'>Delete Your Profile</Card.Title>
               <Card.Subtitle className='text-muted'>If you delete your account, it cannot be recovered.</Card.Subtitle>
               <Card.Body>
-                <Button className='button' variant='danger' onClick={(e) => this.handleDeregister(e)}>
+                <Button className='button' variant='danger' onClick={(e) => this.handleDelete(e)}>
                     Click Here If You're Sure!
 				        </Button>
               </Card.Body>
