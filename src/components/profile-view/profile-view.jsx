@@ -56,11 +56,11 @@ export class ProfileView extends React.Component {
   }
 
   
-  handleRemoveFavorite(movie) {
+  handleRemoveFavorite(movie_id) {
     let user = localStorage.getItem("user");
     let token = localStorage.getItem("token");
     let url =
-    `https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie._id}`
+    `https://camsmyflic.herokuapp.com/users/${user}/Movies/${movie_id}`
     
     axios
       .delete(url, "", {
@@ -131,7 +131,7 @@ export class ProfileView extends React.Component {
       });
   }
 
-  //DOES NOT WORK- WHY
+  
   //deregister
   handleDeregister() {
     const token = localStorage.getItem('token');
@@ -171,6 +171,7 @@ export class ProfileView extends React.Component {
   
 
   render() {
+    
     const {movies} = this.props;
     const {FavoriteMovies,  validated } = this.state;
     const username = localStorage.getItem('user');
@@ -199,7 +200,7 @@ export class ProfileView extends React.Component {
                                 <Button size='sm' className='profile-button view-movie' variant='info' as={Link} to={`/movies/${movie._id}`} target='_self'>
                                   View Movie
                                 </Button>
-                                <Button size='sm' className='profile-button remove-favourite' variant='danger' onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
+                                <Button size='sm' className='profile-button remove-favourite' variant='danger' onClick={(e) => this.handleRemoveFavorite(movie._id)}>
                                   Remove
 							                	</Button>
                               </Card.Body>
