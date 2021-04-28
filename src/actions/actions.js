@@ -14,9 +14,3 @@ export function setFilter(value) {
 
 
 
-{
-    visibilityFilter: string,
-    movies[
-        {title, description, imagepath}
-    ]
-}
