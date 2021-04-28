@@ -9,7 +9,7 @@ export function setMovies(value) {
 }
 
 export function setFilter(value) {
-    return { type: SET_MOVIES, value};
+    return { type: SET_FILTER, value};
 }
 
 
