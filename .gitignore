@@ -9,3 +9,5 @@ src/.cache
 src/dist
 package-lock.json
 package.json
+*.json
+package-lock.json
