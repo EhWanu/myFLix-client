@@ -14,8 +14,7 @@ import { LoginView } from '../login-view/login-view';
 // import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { ProfileView } from "../profile-view/profile-view";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Row, Col } from 'react-bootstrap/';
 
 
 
@@ -48,9 +47,7 @@ class MainView extends React.Component {
     })
     .then(response => {
       // Assign the result to the state
-      this.props.setMovies({
-        movies: response.data
-      });
+      this.props.setMovies(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -76,6 +73,16 @@ class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  logOut() {
+
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    this.setState({
+      user: null
+    });
+    alert('Logged out')
+    window.open('/login', '_self');
+  }
   onRegister(register) {
     this.setState({
       register
@@ -97,10 +104,47 @@ class MainView extends React.Component {
     
     if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />;
     
+
+   
     
     return (
-              <Router>
-              
+             
+    
+             
+        <Router>   
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand href="#home">
+              <img
+                src="src\img\iconfinder_github_291716.svg"
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+                alt="Github Logo"
+              />
+             </Navbar.Brand>
+             <Nav.Link href='/'>Home</Nav.Link>
+                <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
+                <Button onClick={() => this.logOut()}       variant="danger">Log Out</Button>
+
+  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#link">Link</Nav.Link>
+      <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+      </NavDropdown>
+    </Nav>
+    <Form inline>
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-success">Search</Button>
+    </Form>
+  </Navbar.Collapse> */}
+            </Navbar> 
             <Route 
               path="/movies/:movieId" 
                 render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>
@@ -172,4 +216,4 @@ class MainView extends React.Component {
     return { movies: state.movies}
 }
 
-export default connect(mapStateToProps, { setMovies } )(MainView);
+export default connect(mapStateToProps, { setMovies })(MainView);
