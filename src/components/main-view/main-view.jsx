@@ -14,7 +14,7 @@ import { LoginView } from '../login-view/login-view';
 // import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { ProfileView } from "../profile-view/profile-view";
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Row, Col } from 'react-bootstrap/';
+import { Navbar, Nav, Row,  } from 'react-bootstrap/';
 
 
 
@@ -81,7 +81,7 @@ class MainView extends React.Component {
       user: null
     });
     alert('Logged out')
-    window.open('/login', '_self');
+    window.open('/', '_self');
   }
   onRegister(register) {
     this.setState({
@@ -111,40 +111,36 @@ class MainView extends React.Component {
              
     
              
-        <Router>   
-          <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">
+        <Router> 
+          
+          <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
+          
+            <Navbar.Brand href="https://github.com/EhWanu/myFLix-client">
               <img
-                src="src\img\iconfinder_github_291716.svg"
+                src={require('../../img/logo.svg')}
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
                 alt="Github Logo"
               />
              </Navbar.Brand>
-             <Nav.Link href='/'>Home</Nav.Link>
-                <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
-                <Button onClick={() => this.logOut()}       variant="danger">Log Out</Button>
+             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+             <Navbar.Collapse id="responsive-navbar-nav">
+             
 
-  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Link</Nav.Link>
-      <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-      </NavDropdown>
-    </Nav>
-    <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-success">Search</Button>
-    </Form>
-  </Navbar.Collapse> */}
+             
+               <Nav.Link className="text-light" variant="outline-primary" href='/'>Home</Nav.Link>
+            
+            
+               <Nav.Link className="text-light"  variant="outline-primary" href={`/users/${user}`}>Profile</Nav.Link>
+             
+            
+                <Nav.Link className="text-light" onClick={() => this.logOut()}       variant="outline-danger">Log Out</Nav.Link>
+            
+                </Navbar.Collapse>
+
             </Navbar> 
+
             <Route 
               path="/movies/:movieId" 
                 render={({match}) => <MovieView movie={movies.find(m => m._id === match. params.movieId)}/>}/>

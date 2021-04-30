@@ -20,7 +20,7 @@ class MyFlixApplication extends React.Component {
     return (
       <Provider store={store}>
         <Container fluid="sm">
-          <Row>
+        <Row className="justify-content-md-center">
             <Col>
           <MainView/>
           </Col>

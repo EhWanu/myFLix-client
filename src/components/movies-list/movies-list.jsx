@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import { connect } from 'react-redux';
 
@@ -20,9 +21,13 @@ function MoviesList(props) {
   if (!movies) return <div className="main-view"/>;
 
  return filteredMovies.map(m => (
-    <Col md={3} key={m._id}>
-      <MovieCard movie={m} />
-    </Col>
+   <Container flex='sm' className="justify-conent-md-center" fluid="md"  key={m._id}>
+     <div className='container d-flex flex-wrap justify-content-center'>
+       
+         <MovieCard movie={m} />
+      
+    </div>
+  </Container>
   ));
 }
 
