@@ -1,26 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 
-
+import { Card, Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
 
     return (
-      <Card style = {{width: '21rem'}}>
-        <Card.Img variant="top" src={movie.ImagePath} />
-        <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
+      <div className='container'>
+        
+        <Card className='movie-card'>
           <Link to={`/movies/${movie._id}`}>
-            <Button variant="primary">Details</Button>
+            <Card.Img className='movie-card' variant="top" src={movie.ImagePath} />
           </Link>
-        </Card.Body>
-      </Card>
+        </Card>
+      </div>
     );
   }
 }
@@ -28,7 +25,16 @@ export class MovieCard extends React.Component {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }).isRequired,
+    Description: PropTypes.string,
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string,
+      Description: PropTypes.string
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string,
+      Bio: PropTypes.string
+    }),
+    Featured: PropTypes.bool
+  }).isRequired
 };

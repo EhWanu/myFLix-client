@@ -1,13 +1,18 @@
+
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { Link } from "react-router-dom";
+
+// Redux
+import { connect } from 'react-redux';
+
+import './login-view.scss';
+import Config from '../../config';
+
+// react-bootstrap
+import { Form, Button, Container, Col } from 'react-bootstrap';
 import axios from 'axios';
-
-import { Link } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -16,66 +21,109 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     /* Send a request to the server for authentication */
-    axios.post('https://camsmyflic.herokuapp.com/login', {
+    axios.post(`${Config.API_URL}/login`, {
       Username: username,
       Password: password
     })
-    .then(response => {
-      const data = response.data;
-      props.onLoggedIn(data);
-    })
-    .catch(e => {
-      console.log('no such user')
-    });
-  }
-
-  
-  
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user');
+        alert('Invalid username or password');
+      });
+  };
 
   return (
-    <Container>
-      <Form>
-       <Row className="justify-content-md-center">
-        <Col md>
-      
-        
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
-        </Form.Group>
-       </Col>
-       
+    <React.Fragment>
+      <Container>
+        <Col
+          md={{ span: 6, offset: 3 }}
+          lg={{ span: 4, offset: 4 }}
+          className='bg-white rounded p-3'
+        >
+          {/* Header */}
+          <h1 className='text-dark text-center h3 mb-4'>
+            Welcome to{' '}
+            <span className='font-italic app-name'>
+              myFlix
+            </span>
+          </h1>
+          <h2 className='text-left h6 text-dark font-weight-bold mb-2'>
+            Login to Your Account
+          </h2>
+          {/* Login Credentials */}
+          <Form className='mb-2'>
+            {/* Username */}
+            <Form.Group className='mb-2' controlId='loginUsername'>
+              <Form.Control
+                autoFocus
+                type='text'
+                placeholder='Username'
+                name='username'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type='invalid'>
+                Please enter your username
+                </Form.Control.Feedback>
+            </Form.Group>
+            {/* Password */}
+            <Form.Group controlId='loginPassword' className='mb-2'>
+              <Form.Control
+                type='password'
+                placeholder='Password'
+                name='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type='invalid'>
+                Please enter your password
+              </Form.Control.Feedback>
+            </Form.Group>
+            {/* Login Button */}
+            <Button
+              type='submit'
+              className='w-100 btn-lg mb-3 btn'
+              onClick={handleSubmit}
+              variant="dark"
+            >
+              Login
+            </Button>
+          </Form>
+          {/* Register User */}
+          <small className='text-muted text-center d-block'>
+            Not a member yet?
+            <Link to='/register' style={{ textDecoration: 'none' }}>
+              <span className='register text-primary ml-2 link'>
+                Sign up for free
+              </span>
+            </Link>
+          </small>
 
-       
-        <Col md>
-          <Form.Group controlId="formPassword">
-            <Form.Label>Password:</Form.Label>
-            <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-          </Form.Group>
         </Col>
-       </Row>
-
-        <Row>
-          <Col>
-          
-            <Button 
-              variant="primary" 
-               type="submit" 
-               onClick={handleSubmit}>
-               Login
-          </Button>
-         </Col>
-       </Row>
-      </Form>
-
-      <Link to={`/register`}>
-          <Button 
-            variant="primary"
-            className="sign-up-button existing-user"
-          >
-            New user?</Button>
-        </Link>
-
-     </Container>
+      </Container>
+    </React.Fragment>
   );
 }
+
+LoginView.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    pasword: PropTypes.string.isRequired
+  }),
+  onLoggedIn: PropTypes.func.isRequired,
+  onRegister: PropTypes.func
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  userLoginRequested: () => dispatch(userLoginRequested()),
+  loginUser: (username, password) => dispatch(loginUser(username, password)),
+});
+
+export default connect(null, mapDispatchToProps)(LoginView);
