@@ -115,7 +115,7 @@ export class MainView extends React.Component {
           {/* Navbar */}
           <header>
             <Navbar expand="lg" fixed="top" className='nav-bar'>
-              <Navbar.Brand className='app-name navbar-brand' as={Link} to={`/`} target='_self'>myFlix</Navbar.Brand>
+              <Navbar.Brand className='app-name navbar-brand' as={Link} to={`/`} target='_self'>sciFlix</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
@@ -123,13 +123,13 @@ export class MainView extends React.Component {
                     <Nav.Link as={Link} to={`/users/${user}`} target='_self' className='navbar-item'>My Account</Nav.Link>
                   }
                 </Nav>
-                <Form inline>
+                <Form centered className="nav-form" />
                   {user &&
                     <Link to={`/`}>
                       <Button variant="dark" className='logout-button' onClick={() => this.onLogout()}>Logout</Button>
                     </Link>
                   }
-                </Form>
+                
               </Navbar.Collapse>
             </Navbar>
           </header>

@@ -50,7 +50,7 @@ export class MovieView extends React.Component {
     return (
       <div className="container row bg-white rounded m-3 p-3">
         {/* Movie Image */}
-        <div className='col-sm-6 d-flex justify-content-center movie-poster img'>
+        <div className='col-lg-6 d-flex justify-content-center movie-poster'>
           <img src={movie.ImagePath || ''} />
         </div>
         {/* Movie Title and Add to favorites */}

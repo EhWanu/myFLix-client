@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card, Button, Container } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import './movie-card.scss';
 
@@ -10,14 +9,15 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <div className='container'>
-        
+        <div className='container'>
+          <div className='list'>
         <Card className='movie-card'>
           <Link to={`/movies/${movie._id}`}>
-            <Card.Img className='movie-card' variant="top" src={movie.ImagePath} />
+            <Card.Img className='movie-card' src={movie.ImagePath} />
           </Link>
         </Card>
-      </div>
+        </div>
+        </div>
     );
   }
 }

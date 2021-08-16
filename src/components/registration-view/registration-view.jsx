@@ -161,7 +161,6 @@ export function RegisterView(props) {
 
         </Col>
       </Container>
-   
     </React.Fragment>
   );
 }
