@@ -3,5 +3,7 @@
 }
 
 .movie-poster, .movie-title {
+  box-sizing: border-box;
   margin-top: 100px;
+  width: 50%;
 }
