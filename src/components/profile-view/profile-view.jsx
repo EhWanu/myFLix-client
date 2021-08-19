@@ -2,9 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-
 import Config from '../../config'
-
 import './profile-view.scss';
 import {
   Form,
@@ -18,7 +16,11 @@ import {
 export class ProfileView extends React.Component {
   constructor() {
     super();
-    (this.Username = null), (this.Password = null), (this.Email = null), (this.Birthday = null);
+    (this.Username = null), 
+    (this.Password = null), 
+    (this.Email = null),
+    (this.Birthday = null);
+
     this.state = {
       Username: null,
       Password: null,
