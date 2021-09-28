@@ -60,7 +60,7 @@ export class MovieView extends React.Component {
               {movie.Title || ''}
             </span>
           </div>
-          {!fav && <Button className='btn movie-view-btn' onClick={this.addFavorite}> Add to Favorites </Button>}
+          {!fav && <Button className='btn movie-view-btn' onClick={this.addFavorite}> Add to Favorites </B`utton>}
           {/* Movie Description */}
           <div className='description mb-2'>
             <span>{movie.Description || ''}</span>
